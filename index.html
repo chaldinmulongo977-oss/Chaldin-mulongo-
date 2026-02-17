@@ -1,0 +1,1014 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Chal Tech - Solutions numériques professionnelles">
+    <title>Chal Tech - Solutions Numériques</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome pour les icônes (optionnel mais recommandé) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            --primary-color: #004aad; /* Bleu Professionnel */
+            --secondary-color: #002d6b; /* Bleu Foncé */
+            --accent-color: #ff6600; /* Orange Action */
+            --text-color: #333333;
+            --light-bg: #f4f7f6;
+            --white: #ffffff;
+            --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-bg);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        /* --- HEADER & NAVIGATION --- */
+        header {
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            color: var(--accent-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            font-weight: 500;
+            font-size: 1rem;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--primary-color);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--accent-color);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after, .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+        }
+
+        /* --- PAGE SECTIONS (SPA Logic) --- */
+        main {
+            flex: 1;
+        }
+
+        .page-section {
+            display: none; /* Hidden by default */
+            animation: fadeIn 0.5s ease;
+        }
+
+        .page-section.active-section {
+            display: block; /* Show active */
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            background: linear-gradient(135deg, rgba(0, 74, 173, 0.9), rgba(0, 45, 107, 0.95)), url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            text-align: center;
+            padding: 120px 20px;
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            max-width: 700px;
+            font-weight: 300;
+        }
+
+        /* --- BUTTONS --- */
+        .btn {
+            display: inline-block;
+            padding: 15px 35px;
+            background: var(--accent-color);
+            color: var(--white);
+            border-radius: 50px;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 102, 0, 0.3);
+        }
+
+        .btn:hover {
+            background: #e65c00;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 102, 0, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--white);
+            margin-left: 15px;
+            box-shadow: none;
+        }
+
+        .btn-outline:hover {
+            background: var(--white);
+            color: var(--primary-color);
+        }
+
+        /* --- LAYOUT UTILS --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 20px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--accent-color);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        /* --- CARDS --- */
+        .card {
+            background: var(--white);
+            padding: 40px 30px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-align: center;
+            border-top: 5px solid transparent;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-top: 5px solid var(--accent-color);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            margin-bottom: 15px;
+            color: var(--secondary-color);
+            font-size: 1.4rem;
+        }
+
+        /* --- ABOUT PAGE STYLES --- */
+        .about-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .about-image img {
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+
+        .features-list {
+            margin-top: 20px;
+        }
+
+        .features-list li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 500;
+        }
+
+        .features-list i {
+            color: var(--accent-color);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .team-member {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .team-member img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .team-info {
+            padding: 20px;
+        }
+
+        .team-info h4 {
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        .team-info p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* --- PORTFOLIO STYLES --- */
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 10px 25px;
+            border: 2px solid var(--primary-color);
+            background: transparent;
+            color: var(--primary-color);
+            cursor: pointer;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .portfolio-item {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            height: 250px;
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .portfolio-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 45, 107, 0.85);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: var(--white);
+            opacity: 0;
+            transition: var(--transition);
+            text-align: center;
+            padding: 20px;
+        }
+
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+
+        /* --- CONTACT STYLES --- */
+        .contact-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .contact-info {
+            flex: 1;
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 50px;
+            min-width: 300px;
+        }
+
+        .contact-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .info-item i {
+            font-size: 1.2rem;
+            color: var(--accent-color);
+        }
+
+        .contact-form {
+            flex: 2;
+            padding: 50px;
+            min-width: 300px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--secondary-color);
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-family: inherit;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0, 74, 173, 0.1);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: var(--secondary-color);
+            color: #dbe4ee;
+            padding: 60px 20px 20px;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-col h4 {
+            color: var(--white);
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--accent-color);
+            padding-left: 5px;
+            transition: var(--transition);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--accent-color);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 40px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+                z-index: 1001;
+            }
+
+            .nav-links {
+                position: fixed;
+                right: -100%;
+                top: 0;
+                height: 100vh;
+                background: var(--white);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                width: 80%;
+                max-width: 300px;
+                transition: var(--transition);
+                box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+                z-index: 1000;
+            }
+
+            .nav-links.nav-active {
+                right: 0;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .about-wrapper, .contact-container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <i class="fas fa-rocket"></i> Chal Tech
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home" class="nav-link active" onclick="showSection('home')">Accueil</a></li>
+                <li><a href="#about" class="nav-link" onclick="showSection('about')">À propos</a></li>
+                <li><a href="#services" class="nav-link" onclick="showSection('services')">Services</a></li>
+                <li><a href="#portfolio" class="nav-link" onclick="showSection('portfolio')">Portfolio</a></li>
+                <li><a href="#contact" class="nav-link" onclick="showSection('contact')">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- HOME SECTION -->
+        <div id="home" class="page-section active-section">
+            <section class="hero">
+                <h1>Chal Tech</h1>
+                <p>Solutions numériques professionnelles pour propulser votre entreprise</p>
+                <div>
+                    <button onclick="showSection('contact')" class="btn">Contactez-nous</button>
+                    <button onclick="showSection('portfolio')" class="btn btn-outline">Voir nos projets</button>
+                </div>
+            </section>
+
+            <section class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Nos Expertises</h2>
+                    <p>Ce que nous faisons de mieux pour vous.</p>
+                </div>
+                <div class="grid-3">
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-laptop-code"></i></div>
+                        <h3>Sites Web</h3>
+                        <p>Création de sites modernes, rapides et adaptatifs pour maximiser votre présence en ligne.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-mobile-alt"></i></div>
+                        <h3>Applications</h3>
+                        <p>Développement sur mesure d'applications mobiles et logiciels desktop performants.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-chart-line"></i></div>
+                        <h3>Marketing Digital</h3>
+                        <p>Stratégies SEO et campagnes publicitaires pour booster votre visibilité et vos ventes.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ABOUT SECTION -->
+        <div id="about" class="page-section">
+            <section class="container">
+                <div class="section-header">
+                    <h2 class="section-title">À Propos de Nous</h2>
+                </div>
+                <div class="about-wrapper">
+                    <div class="about-text">
+                        <h3 style="margin-bottom:15px; color:var(--primary-color);">Votre partenaire technologique</h3>
+                        <p><strong>Chal Tech</strong> est une entreprise spécialisée dans la création de solutions numériques sur mesure pour les entreprises. Notre mission est d'aider les clients à réussir grâce à la technologie.</p>
+                        <br>
+                        <p>Nous combinons créativité, stratégie et expertise technique pour transformer vos idées en réalité digitale.</p>
+                        
+                        <ul class="features-list">
+                            <li><i class="fas fa-check-circle"></i> Expertise technique de pointe</li>
+                            <li><i class="fas fa-check-circle"></i> Support client 24/7</li>
+                            <li><i class="fas fa-check-circle"></i> Solutions innovantes et évolutives</li>
+                        </ul>
+                    </div>
+                    <div class="about-image">
+                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80" alt="Équipe Chal Tech">
+                    </div>
+                </div>
+
+                <div class="section-header" style="margin-top: 80px;">
+                    <h2 class="section-title">Notre Équipe</h2>
+                </div>
+                <div class="team-grid">
+                    <div class="team-member">
+                        <img src="ceo.jpg" alt="CEO">
+                        <div class="team-info">
+                            <h4>Chaldin mulongo</h4>
+                            <p>CEO & Fondateur</p>
+                        </div>
+                    </div>
+                    <div class="team-member">
+                        <img src="devellopeur.jpg" alt="Lead Dev">
+                        <div class="team-info">
+                            <h4>Divin bonkeke</h4>
+                            <p>Développeur Lead</p>
+                        </div>
+                    </div>
+                    <div class="team-member">
+                        <img src="marketing.jpg" alt="Marketing">
+                        <div class="team-info">
+                            <h4>Andre mulongo</h4>
+                            <p>Expert Marketing</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- SERVICES SECTION -->
+        <div id="services" class="page-section">
+            <section class="hero" style="min-height: 40vh; background-image: url('https://images.unsplash.com/photo-1504384308090-c54be3855833?auto=format&fit=crop&w=1600&q=80');">
+                <h1>Nos Services</h1>
+                <p>Des solutions complètes pour chaque étape de votre croissance.</p>
+            </section>
+            
+            <section class="container">
+                <div class="grid-3">
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-globe"></i></div>
+                        <h3>Développement Web</h3>
+                        <p>Sites vitrines, e-commerce et portails web complexes. Nous utilisons les dernières technologies (HTML5, React, Node.js).</p>
+                        <br>
+                        <button onclick="showSection('contact')" class="btn">Demander un devis</button>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-layer-group"></i></div>
+                        <h3>UI/UX Design</h3>
+                        <p>Conception d'interfaces intuitives et esthétiques centrées sur l'expérience utilisateur pour maximiser la rétention.</p>
+                        <br>
+                        <button onclick="showSection('contact')" class="btn">Demander un devis</button>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-bullhorn"></i></div>
+                        <h3>Stratégie Digitale</h3>
+                        <p>Audit SEO, gestion des réseaux sociaux et campagnes Google Ads pour atteindre votre audience cible.</p>
+                        <br>
+                        <button onclick="showSection('contact')" class="btn">Demander un devis</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- PORTFOLIO SECTION -->
+        <div id="portfolio" class="page-section">
+            <section class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Nos Réalisations</h2>
+                    <p>Découvrez les projets que nous avons concrétisés.</p>
+                </div>
+
+                <div class="filter-buttons">
+                    <button class="filter-btn active" onclick="filterPortfolio('all', this)">Tous</button>
+                    <button class="filter-btn" onclick="filterPortfolio('web', this)">Web</button>
+                    <button class="filter-btn" onclick="filterPortfolio('app', this)">Apps</button>
+                    <button class="filter-btn" onclick="filterPortfolio('design', this)">Design</button>
+                </div>
+
+                <div class="portfolio-grid">
+                    <div class="portfolio-item web">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80" alt="Project 1">
+                        <div class="portfolio-overlay">
+                            <h3>E-Shop Mode</h3>
+                            <p>Site E-commerce Complet</p>
+                        </div>
+                    </div>
+                    <div class="portfolio-item app">
+                        <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=600&q=80" alt="Project 2">
+                        <div class="portfolio-overlay">
+                            <h3>Delivery App</h3>
+                            <p>Application Mobile iOS/Android</p>
+                        </div>
+                    </div>
+                    <div class="portfolio-item web">
+                        <img src="https://images.unsplash.com/photo-1481487484168-9b930d5b7960?auto=format&fit=crop&w=600&q=80" alt="Project 3">
+                        <div class="portfolio-overlay">
+                            <h3>Blog Tech</h3>
+                            <p>Portail de contenu dynamique</p>
+                        </div>
+                    </div>
+                    <div class="portfolio-item design">
+                        <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=600&q=80" alt="Project 4">
+                        <div class="portfolio-overlay">
+                            <h3>Brand Identity</h3>
+                            <p>Refonte de marque complète</p>
+                        </div>
+                    </div>
+                    <div class="portfolio-item app">
+                        <img src="https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?auto=format&fit=crop&w=600&q=80" alt="Project 5">
+                        <div class="portfolio-overlay">
+                            <h3>Finance Tracker</h3>
+                            <p>Tableau de bord SaaS</p>
+                        </div>
+                    </div>
+                    <div class="portfolio-item web">
+                        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=600&q=80" alt="Project 6">
+                        <div class="portfolio-overlay">
+                            <h3>Cabinet Avocat</h3>
+                            <p>Site vitrine corporate</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- CONTACT SECTION -->
+        <div id="contact" class="page-section">
+            <section class="hero" style="min-height: 40vh; background-image: url('https://images.unsplash.com/photo-1423666639041-f56000c27a9a?auto=format&fit=crop&w=1600&q=80');">
+                <h1>Contactez-nous</h1>
+                <p>Prêt à démarrer votre projet ? Nous sommes à votre écoute.</p>
+            </section>
+
+            <section class="container">
+                <div class="contact-container">
+                    <div class="contact-info">
+                        <h3>Info Contact</h3>
+                        <p style="margin-bottom: 30px; opacity: 0.9;">N'hésitez pas à nous contacter pour un devis gratuit ou une simple question.</p>
+                        
+                        <div class="info-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>kinshasa (RDC)</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>infochaltech@gmail.com</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+243 84 92 91 889</span>
+                        </div>
+
+                        <div style="margin-top: 40px;">
+                            <a href="https://wa.me/message/FKTBBSYI6YLVE1" class="btn" style="background-color: #25D366; width: 100%; text-align: center;"><i class="fab fa-whatsapp"></i> Chat WhatsApp</a>
+                        </div>
+                    </div>
+
+                   <div class="contact-form">
+    <h3>Envoyez un message</h3>
+    <form id="my-form" action="https://formspree.io/f/mdalzvpd" method="POST">
+       <input type="text" name="_gotcha" style="display:none">
+        <div class="form-group">
+            <label for="name">Nom Complet</label>
+            <input type="text" name="name" id="name" required placeholder="Votre nom">
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" required placeholder="votre@email.com">
+        </div>
+        <div class="form-group">
+            <label for="message">Message</label>
+            <textarea name="message" id="message" rows="5" required placeholder="Comment pouvons-nous vous aider ?"></textarea>
+        </div>
+        <button type="submit" id="submit-btn" class="btn">Envoyer le message</button>
+        <p id="status" style="margin-top: 15px; font-weight: bold;"></p>
+    </form>
+</div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-col">
+                <div class="logo" style="margin-bottom: 20px;">
+                    <i class="fas fa-rocket" style="color:var(--accent-color);"></i> Chal Tech
+                </div>
+                <p>Votre partenaire de confiance pour la transformation numérique. Nous créons des solutions qui durent.</p>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/profile.php?id=61588469422277"><i class="fab fa-facebook-f"></i></a>
+                    
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Liens Rapides</h4>
+                <ul>
+                    <li><a href="#home" onclick="showSection('home')">Accueil</a></li>
+                    <li><a href="#about" onclick="showSection('about')">À propos</a></li>
+                    <li><a href="#services" onclick="showSection('services')">Services</a></li>
+                    <li><a href="#portfolio" onclick="showSection('portfolio')">Portfolio</a></li>
+                    <li><a href="#contact" onclick="showSection('contact')">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="#">Développement Web</a></li>
+                    <li><a href="#">Développement Mobile</a></li>
+                    <li><a href="#">UI/UX Design</a></li>
+                    <li><a href="#">Marketing Digital</a></li>
+                    <li><a href="#">Consulting SEO</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 Chal Tech. Tous droits réservés. | Politique de Confidentialité</p>
+        </div>
+    </footer>
+
+    <script>
+        // NAVIGATION LOGIC (SPA Simulation)
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.page-section');
+            sections.forEach(section => {
+                section.classList.remove('active-section');
+            });
+
+            // Show target section
+            document.getElementById(sectionId).classList.add('active-section');
+
+            // Update Active Nav Link
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if(link.getAttribute('href') === '#' + sectionId) {
+                    link.classList.add('active');
+                }
+            });
+
+            // Close mobile menu if open
+            const navMenu = document.querySelector('.nav-links');
+            const hamburger = document.querySelector('.hamburger i');
+            navMenu.classList.remove('nav-active');
+            hamburger.classList.remove('fa-times');
+            hamburger.classList.add('fa-bars');
+
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        // MOBILE MENU TOGGLE
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-links');
+        
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('nav-active');
+            
+            const icon = hamburger.querySelector('i');
+            if (navMenu.classList.contains('nav-active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        // PORTFOLIO FILTERING
+        function filterPortfolio(category, btn) {
+            // Update buttons
+            const buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            // Filter items
+            const items = document.querySelectorAll('.portfolio-item');
+            items.forEach(item => {
+                if (category === 'all' || item.classList.contains(category)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        // Smooth Scroll handling for anchor links within sections
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                // Let the showSection function handle main nav
+                if(this.classList.contains('nav-link')) return;
+
+                const targetId = this.getAttribute('href').substring(1);
+                const targetSection = document.getElementById(targetId);
+                
+                if (targetSection && targetSection.classList.contains('page-section')) {
+                    e.preventDefault();
+                    showSection(targetId);
+                }
+            });
+        });
+// Gestion de l'envoi AJAX pour éviter la redirection Formspree
+var form = document.getElementById("my-form");
+    
+async function handleSubmit(event) {
+    event.preventDefault();
+    var status = document.getElementById("status");
+    var data = new FormData(event.target);
+    var button = document.getElementById("submit-btn");
+
+    button.disabled = true;
+    button.innerText = "Envoi en cours...";
+
+    fetch(event.target.action, {
+        method: form.method,
+        body: data,
+        headers: {
+            'Accept': 'application/json'
+        }
+    }).then(response => {
+        if (response.ok) {
+            status.innerHTML = "✅ Merci ! Votre message a été envoyé.";
+            status.style.color = "green";
+            form.reset();
+            button.innerText = "Envoyer le message";
+            button.disabled = false;
+        } else {
+            response.json().then(data => {
+                if (Object.hasOwn(data, 'errors')) {
+                    status.innerHTML = data["errors"].map(error => error["message"]).join(", ");
+                } else {
+                    status.innerHTML = "❌ Oups ! Il y a eu un problème.";
+                }
+                status.style.color = "red";
+                button.disabled = false;
+                button.innerText = "Réessayer";
+            })
+        }
+    }).catch(error => {
+        status.innerHTML = "❌ Erreur de connexion au serveur.";
+        status.style.color = "red";
+        button.disabled = false;
+    });
+}
+
+form.addEventListener("submit", handleSubmit);
+    </script>
+</body>
+</html>
